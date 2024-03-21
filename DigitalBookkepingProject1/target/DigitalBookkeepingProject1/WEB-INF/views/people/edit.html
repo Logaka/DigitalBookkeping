@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Person</title>
+</head>
+<body>
+<form th:method="post" th:action="@{/people/{id}(id=${person.getId()})}" th:Object="${person}">
+    <label for="fullName">Enter name: </label>
+    <input type="text" th:field="*{fullName}" id="fullName">
+    <div style="color: red" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">FullName</div>
+    <br>
+    <label for="birthday">Enter birthday: </label>
+    <input type="text" th:field="*{birthday}" id="birthday">
+    <div style="color: red" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}">Birthday</div>
+    <br/>
+    <input type="submit" value="Update">
+</form>
+</body>
+</html>

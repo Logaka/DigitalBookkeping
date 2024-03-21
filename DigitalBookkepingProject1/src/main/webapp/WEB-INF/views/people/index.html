@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Particular Person</title>
+
+</head>
+<body>
+    <p th:text="${person.getFullName()} + ', ' + ${person.getBirthday()}">Value</p>
+
+    <hr>
+    <div th:if="${ownBooks != null and not #lists.isEmpty(ownBooks)}">
+        <p>Books:</p>
+        <div th:each="book: ${ownBooks}">
+            <p th:text="${book.name + ', ' + book.autor + ', ' + book.year}"></p>
+        </div>
+    </div>
+    <div th:if="${ownBooks == null or #lists.isEmpty(ownBooks)}">
+        This Person does not have any books
+    </div>
+    <hr>
+    <a th:href="@{/people/{id}/edit(id = ${person.getId()})}">Edit</a>
+    <br/>
+    <br/>
+    <form th:method="delete" th:action="@{/people/{id}/delete(id=${person.getId()})}">
+        <input type="submit" value="Delete">
+    </form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Particular Book</title>
+</head>
+<body>
+<p th:text="${book.id}">Value</p>
+<p th:text="${book.name}">Value</p>
+<p th:text="${book.autor}">Value</p>
+<p th:text="${book.year}">Value</p>
+
+
+<div th:if="${bookOwner != null}">
+    Book Owner: <span th:text="${bookOwner.fullName}"></span>
+    <form th:method="delete" th:action="@{/books/{id}/owner/delete(id=${book.id})}">
+        <input type="submit" value="Delete Owner">
+    </form>
+</div>
+<div th:if="${bookOwner == null}">
+    <form th:method="POST" th:action="@{/books/{id}/owner(id=${person.id})}">
+        <label for="select">Select owner</label>
+        <select id="select" th:Object="${person}" th:field="*{id}">
+            <option th:each="person : ${people}" th:value="${person.getId()}"
+                    th:text="${person.fullName}"></option>
+        </select>
+        <input type="submit" value="submit"/>
+    </form>
+</div>
+<hr>
+<a th:href="@{/books/{id}/edit(id=${book.id})}">Edit</a>
+<br/>
+<br/>
+<form th:method="delete" th:action="@{/books/{id}/delete(id=${book.id})}">
+    <input type="submit" value="Delete">
+</form>
+</body>
+</html>
